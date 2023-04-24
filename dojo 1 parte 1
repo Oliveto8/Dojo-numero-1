@@ -1,0 +1,114 @@
+/* C++ code
+
+El gobierno de la ciudad quiere actualizar los semáforos que
+tiene instalados. La empresa  “UTNFRA Robotics” ganó la
+licitación y ahora les toca a los desarrolladores de la
+empresa generar  un proyecto low cost que cumpla con las
+especificaciones que el gobierno de la ciudad nos  impone,
+a saber las especificaciones son las siguientes. 
+1 - LA PRIMER  ENTREGA SERÁ LO SIGUIENTE, 
+1- El semáforo tiene que tener 2 leds de cada color como
+mínimo, en caso de que uno se  rompa. 
+2- Tiene que implementar los tiempos correctos como se
+detallan a continuación. 
+3- El verde dura 5 segundos. 
+4- El amarillo dura 3 segundos. 
+5- Rojo dura 5 segundos. 
+6- Tiene que tener señalización para personas no videntes
+como se detalla a  continuación. (Buzzer o piezo)
+7- Durante el rojo: Tiene que sonar 2 vez por segundo en
+un tono FUERTE. 
+
+*/
+
+#define LEDROJOS 11
+#define LEDAMARILLOS 10
+#define LEDVERDES 9
+#define PIEZO 8
+
+int tresSegundos;
+int cincoSegundos;
+
+void setup()
+{
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(8, OUTPUT);
+  
+  tresSegundos = 3000;
+  cincoSegundos = 5000;
+  
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  prenderCincoSegundos(9);
+  prenderTresSegundos(10);
+  prenderCincoSegundosYPiezo(11);
+}
+
+void prender(int led) //prender
+{
+  digitalWrite(led, HIGH);
+}
+
+void apagar(int led) //apagar
+{
+  digitalWrite(led, LOW);
+}
+
+void prenderTresSegundos(int led) //prender tres segundos
+{  
+  prender(led);
+  delay(tresSegundos);
+  apagar(led);
+  delay(1000);
+}
+
+void prenderCincoSegundos(int led) //prender cinco segundos
+{
+  prender(led);
+  delay(cincoSegundos);
+  apagar(led);
+  delay(1000);
+}
+
+void prenderPiezo() // prender y apagar piezo
+{
+  prender(8);
+  delay(200);
+  apagar(8);
+  delay(200);
+}
+
+
+void prenderCincoSegundosYPiezo(int led) // prender y apagar piezo en luz roja
+{
+  prender(led);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  prenderPiezo();
+  delay(100);
+  apagar(led);
+  delay(1000);
+}
+  
+  
